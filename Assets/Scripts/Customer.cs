@@ -1,8 +1,6 @@
 using System.Collections.Generic;
-using System;
 using UnityEngine;
 using UnityEngine.AI;
-using UnityEngine.SceneManagement;
 
 public class Customer : MonoBehaviour
 {
@@ -11,16 +9,18 @@ public class Customer : MonoBehaviour
     public Transform cashier;
     public int desiredProductCount = 1;
     public List<Product> boughtItems = new List<Product>();
-    
-    private void Start() {
-        Debug.Log(gm.productList.Count);
-        desiredProductCount = UnityEngine.Random.Range(1, gm.productList.Count + 1);
+
+    private void Start()
+    {
+        desiredProductCount = Random.Range(1, gm.productList.Count + 1);
+        Debug.Log(desiredProductCount);
         Product.OnProductPicked += OnProductPicked;
         agent = GetComponent<NavMeshAgent>();
         Buy();
     }
 
-    private void OnProductPicked(){
+    private void OnProductPicked()
+    {
         if (desiredProductCount > 0)
         {
             Buy();
@@ -31,7 +31,8 @@ public class Customer : MonoBehaviour
         }
     }
 
-    private void Buy(){
+    private void Buy()
+    {
         var product = gm.GetRandomProduct();
         agent.SetDestination(product.transform.position);
         gm.productList.Remove(product);
