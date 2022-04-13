@@ -4,11 +4,11 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
-    public List<Transform> productList = new List<Transform>();
+    public List<Product> productList = new List<Product>();
 
-    public Vector3 GetProductPos()
+    public Product GetRandomProduct()
     {
-        return productList[Random.Range(0, productList.Count)].position;
+        return productList[Random.Range(0, productList.Count)];
     }
 
 }

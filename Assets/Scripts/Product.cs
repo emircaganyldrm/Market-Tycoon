@@ -9,6 +9,8 @@ public class Product : MonoBehaviour
     private void OnTriggerEnter(Collider other) {
         Debug.Log("collided");
         if (other.GetComponent<NavMeshAgent>() != null)
+        {
             OnProductPicked?.Invoke();
+        }
     }
 }
