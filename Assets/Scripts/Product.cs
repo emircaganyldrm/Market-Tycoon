@@ -11,6 +11,7 @@ public class Product : MonoBehaviour
         if (other.GetComponent<NavMeshAgent>() != null)
         {
             OnProductPicked?.Invoke();
+            gameObject.SetActive(false);
         }
     }
 }

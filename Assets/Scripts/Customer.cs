@@ -14,7 +14,7 @@ public class Customer : MonoBehaviour
     
     private void Start() {
         Debug.Log(gm.productList.Count);
-        desiredProductCount = UnityEngine.Random.Range(1, gm.productList.Count);
+        desiredProductCount = UnityEngine.Random.Range(1, gm.productList.Count + 1);
         Product.OnProductPicked += OnProductPicked;
         agent = GetComponent<NavMeshAgent>();
         Buy();
