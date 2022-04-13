@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
@@ -5,15 +6,17 @@ using UnityEngine.AI;
 public class Customer : MonoBehaviour
 {
     public GameManager gm;
+    public MoneyManager moneyManager;
     private NavMeshAgent agent;
-    public Transform cashier;
     public int desiredProductCount = 1;
     public List<Product> boughtItems = new List<Product>();
+    [Header("Destinations")]
+    public Transform cashier;
+    public Transform leaveArea;
 
     private void Start()
     {
         desiredProductCount = Random.Range(1, gm.productList.Count + 1);
-        Debug.Log(desiredProductCount);
         Product.OnProductPicked += OnProductPicked;
         agent = GetComponent<NavMeshAgent>();
         Buy();
@@ -27,7 +30,7 @@ public class Customer : MonoBehaviour
         }
         else
         {
-            CheckOut();
+            StartCoroutine(CheckOut());
         }
     }
 
@@ -40,9 +43,19 @@ public class Customer : MonoBehaviour
         desiredProductCount--;
     }
 
-    private void CheckOut()
+    private IEnumerator CheckOut()
     {
         agent.SetDestination(cashier.position);
+        yield return new WaitUntil(() => !agent.hasPath);
+        
+        foreach(var item in boughtItems){
+            moneyManager.EarnMoney(10);
+        
+        }
+        yield return new WaitForSeconds(2f);
+        agent.SetDestination(leaveArea.position);
+        yield return new WaitForSeconds(2f); 
+        Destroy(gameObject);
     }
 }
 

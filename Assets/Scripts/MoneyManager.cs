@@ -6,14 +6,14 @@ using TMPro;
 
 public class MoneyManager : MonoBehaviour
 {
-    public static int money;
+    public int money;
     public TextMeshProUGUI moneyText;
 
     private void Start() 
     {
         moneyText.text = money.ToString();
     }
-    public void GiveMoney(int amount)
+    public void EarnMoney(int amount)
     {
         money += amount;
         moneyText.text = money.ToString();
