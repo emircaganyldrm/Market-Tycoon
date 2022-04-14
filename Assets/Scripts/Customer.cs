@@ -38,7 +38,6 @@ public class Customer : MonoBehaviour
     {
         var product = gm.GetRandomProduct();
         agent.SetDestination(product.transform.position);
-        gm.productList.Remove(product);
         boughtItems.Add(product);
         desiredProductCount--;
     }

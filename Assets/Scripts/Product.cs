@@ -10,7 +10,6 @@ public class Product : MonoBehaviour
     {
         if (other.GetComponent<NavMeshAgent>() != null && other.GetComponent<NavMeshAgent>().pathStatus == NavMeshPathStatus.PathComplete)
         {
-            gameObject.SetActive(false);
             OnProductPicked?.Invoke();
         }
     }
