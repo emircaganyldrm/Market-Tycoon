@@ -37,6 +37,7 @@ public class Customer : MonoBehaviour
     private void Buy()
     {
         var product = gm.GetRandomProduct();
+        if (product == null) return;
         agent.SetDestination(product.transform.position);
         gm.productList.Remove(product);
         boughtItems.Add(product);
@@ -50,7 +51,6 @@ public class Customer : MonoBehaviour
         
         foreach(var item in boughtItems){
             moneyManager.EarnMoney(10);
-        
         }
         yield return new WaitForSeconds(2f);
         agent.SetDestination(leaveArea.position);
